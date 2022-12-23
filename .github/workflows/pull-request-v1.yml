@@ -1,4 +1,4 @@
-name: Run the Action on each commit1
+name: Run the Action on each commit
 on:
   push:
     branches-ignore: master
@@ -13,4 +13,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           title: Automatic pull request
-
