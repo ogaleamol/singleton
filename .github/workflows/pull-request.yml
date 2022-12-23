@@ -3,14 +3,18 @@ on:
   push:
     branches-ignore: master
 jobs:
-  action-pull-request:
+  pull-request:
+    name: Open PR to main
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Create pull request
-        uses: devops-infra/action-pull-request@v0.5.3
-        with:
-          base: master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          title: Automatic pull request
+    - uses: actions/checkout@v2
+      name: checkout
+
+    - uses: repo-sync/pull-request@v2
+      name: pull-request
+      with:
+        destination_branch: "main"
+        pr_title: "Pulling ${{ github.ref }} into main"
+        pr_body: "👑 *An automated PR*"
+        pr_draft: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
